@@ -9,10 +9,13 @@ function App() {
   const sendMessage = () => {
     socket.emit("send_message", { message });
   };
+  const handleInitialize = () => {
+    socket.emit("test", { data: "test message" });
+  };
   useEffect(() => {
+    handleInitialize();
     socket.on("receive_message", (data) => {
-      // alert(data.message);
-      setMessageReceivedArr([...messageReceivedArr, data.message]);
+      setMessageReceivedArr(data);
     });
   }, []);
   return (
