@@ -13,15 +13,13 @@ const io = new Server(server, {
   },
 });
 
-let messageArr = [];
-
 io.on("connection", (socket) => {
   console.log(`User Connected: ${socket.id}`);
   socket.on("join_room", (data) => {
     socket.join(data);
   });
+  socket.on("test", (data) => {});
   socket.on("send_message", (data) => {
-    messageArr = [...messageArr, data];
     socket.broadcast.emit("receive_message", data);
   });
 });
